@@ -88,7 +88,7 @@ function cookie_consent_banner_schema() {
 }
 
 /**
- * Implements hook_update_N().
+ * Set the default "Consent storage method" as our custom storage method.
  */
 function cookie_consent_banner_update_7001() {
   $eu_cookie_settings = variable_get('eu_cookie_compliance', array());

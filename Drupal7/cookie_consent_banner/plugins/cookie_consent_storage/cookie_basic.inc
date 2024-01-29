@@ -25,6 +25,7 @@ function cookie_consent_banner_store_consent_basic($type) {
   $match = preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
   $banner_message = ($match) ? $eu_cookie_settings['mobile_popup_info']['value'] : $eu_cookie_settings['popup_info']['value'];
 
+  // Insert data in a custom table based on the user's action.
   db_insert('cookie_compliance_basic_consent')
     ->fields(array(
       'unique_key' => session_id(),

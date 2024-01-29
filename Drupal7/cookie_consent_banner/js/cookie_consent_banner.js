@@ -23,7 +23,7 @@
         $(this, context).parent().parent().toggleClass('active-accordion');
       });
 
-      // Store action in cookie.
+      // Based on user performance, like accept/reject or agree/disagree, the button value is stored in the cookie, and this cookie value will be stored in a custom table in the database.
       $('body', context).on('click', '.agree-button.eu-cookie-compliance-default-button', function () {
         $.cookie('cookie-action', 'Accept All', { path: '/' });
       });

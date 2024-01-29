@@ -82,7 +82,7 @@ function get_cookie_category_checkbox_default_state_options_list() {
  * Implements hook_theme_registry_alter().
  */
 function cookie_consent_banner_theme_registry_alter(&$theme_registry) {
-  $theme_registry['eu_cookie_compliance_popup_info']['path'] = drupal_get_path('module', 'cookie_consent_banner').'/templates';
+  $theme_registry['eu_cookie_compliance_popup_info']['path'] = drupal_get_path('module', 'cookie_consent_banner') . '/templates';
 }
 
 /**
