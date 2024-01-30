@@ -5,7 +5,7 @@ namespace Drupal\pim_import_csv\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class PimDownloadTemplateController.
+ * Implements download template feature.
  */
 class PimDownloadTemplateController {
 

@@ -3,7 +3,6 @@
 namespace Drupal\pim_import_csv;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\File\FileUrlGeneratorInterface;
 use Drupal\Core\File\FileSystem;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
@@ -26,13 +25,6 @@ class PimCsvProcessor {
    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
-
-  /**
-   * The file system service.
-   *
-   * @var \Drupal\Core\File\FileUrlGeneratorInterface
-   */
-  protected $urlGenerator;
 
   /**
    * The messenger service.
@@ -75,23 +67,19 @@ class PimCsvProcessor {
    *   The filesystem service.
    * @param \Drupal\file\FileRepository $fileRepository
    *   The file repository service.
-   * @param \Drupal\Core\File\FileUrlGeneratorInterface $urlGenerator
-   *   The file system service.
    */
   public function __construct(
     EntityTypeManagerInterface $entityTypeManager,
     MessengerInterface $messenger,
     LoggerChannelFactoryInterface $logger,
     FileSystem $fileSystem,
-    FileRepository $fileRepository,
-    FileUrlGeneratorInterface $urlGenerator
+    FileRepository $fileRepository
   ) {
     $this->entityTypeManager = $entityTypeManager;
     $this->messenger = $messenger;
     $this->logger = $logger;
     $this->fileSystem = $fileSystem;
     $this->fileRepository = $fileRepository;
-    $this->urlGenerator = $urlGenerator;
   }
 
   /**

@@ -1,4 +1,4 @@
 services:
   pim_import_csv.product_data_service:
     class: Drupal\pim_import_csv\PimCsvProcessor
-    arguments: ['@entity_type.manager','@messenger','@logger.factory','@file_system','@file.repository','@file_url_generator']
+    arguments: ['@entity_type.manager','@messenger','@logger.factory','@file_system','@file.repository']

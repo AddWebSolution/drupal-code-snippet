@@ -3,13 +3,9 @@
 namespace Drupal\pim_import_csv\Form;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\File\FileSystem;
-use Drupal\Core\File\FileUrlGenerator;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Messenger\MessengerInterface;
-use Drupal\file\FileRepository;
 use Drupal\node\Entity\Node;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Url;
@@ -35,34 +31,6 @@ class PimImportCsvForm extends FormBase {
   protected $messenger;
 
   /**
-   * The logger service.
-   *
-   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
-   */
-  protected $logger;
-
-  /**
-   * The file_system service.
-   *
-   * @var \Drupal\Core\File\FileSystem
-   */
-  protected $fileSystem;
-
-  /**
-   * The file repository service.
-   *
-   * @var \Drupal\file\FileRepository
-   */
-  protected $fileRepository;
-
-  /**
-   * The file URL generator service.
-   *
-   * @var \Drupal\Core\File\FileUrlGenerator
-   */
-  protected $urlGenerator;
-
-  /**
    * The product data service.
    *
    * @var \Drupal\pim_import_csv\Service\PimCsvProcessor
@@ -76,32 +44,16 @@ class PimImportCsvForm extends FormBase {
    *   The entity type manager.
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger service.
-   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger
-   *   The logger service.
-   * @param \Drupal\Core\File\FileSystem $fileSystem
-   *   The filesystem service.
-   * @param \Drupal\file\FileRepository $fileRepository
-   *   The file repository service.
-   * @param \Drupal\Core\File\FileUrlGenerator $urlGenerator
-   *   The file URL generator service.
    * @param \Drupal\pim_import_csv\PimCsvProcessor $productDataService
    *   The product csv preprocessor service.
    */
   public function __construct(
     EntityTypeManagerInterface $entityManager,
     MessengerInterface $messenger,
-    LoggerChannelFactoryInterface $logger,
-    FileSystem $fileSystem,
-    FileRepository $fileRepository,
-    FileUrlGenerator $urlGenerator,
     PimCsvProcessor $productDataService
   ) {
     $this->entityManager = $entityManager;
     $this->messenger = $messenger;
-    $this->logger = $logger;
-    $this->fileSystem = $fileSystem;
-    $this->fileRepository = $fileRepository;
-    $this->urlGenerator = $urlGenerator;
     $this->productDataService = $productDataService;
   }
 
@@ -112,10 +64,6 @@ class PimImportCsvForm extends FormBase {
     return new static(
       $container->get('entity_type.manager'),
       $container->get('messenger'),
-      $container->get('logger.factory'),
-      $container->get('file_system'),
-      $container->get('file.repository'),
-      $container->get('file_url_generator'),
       $container->get('pim_import_csv.product_data_service')
     );
   }
