@@ -1,0 +1,154 @@
+<?php
+
+/**
+ * @file
+ * Main module file for the Xe Currency Conversion module
+ * including import functions as well as menu item definition
+ * for importing currency conversion data from xe.com feeds.
+ *
+ */
+
+// Define the base url for the xe.com feed as a constant.
+define('XE_CURRENCY_CONVERSION_BASE_URL', 'https://apilayer.net/api/');
+
+// define the table name for this module.
+define('XE_CURRENCY_CONVERSION_TABLE', 'xe_currency_conversion');
+// The time window constants for xe updates on cron run.
+define('XE_CURRENCY_CONVERSION_WINDOW_OPEN', '23:45:00');
+// Ensure the after midnight window close is that of the next day.
+define('XE_CURRENCY_CONVERSION_WINDOW_CLOSE', '00:15:00 + 1 day');
+// The max process time for queue operations
+define('XE_CURRENCY_CONVERSION_DEFAULT_MAX_TASK_TIME', 60);
+
+/**
+ * Implements hook_permission().
+ *
+ * @return array  An array of permissions to manage the xe.com config page.
+ */
+function xe_currency_conversion_permission() {
+  return [
+    'administer xe currency conversion' => [
+      'title' => t('Administer xe currency conversion'),
+      'description' => t('Manage the settings for the Currency Conversion module.'),
+    ],
+  ];
+}
+
+/**
+ * Implements hook_field_formatter_info_alter().
+ *
+ * Add the xe_currency_conversion formatter to the decimal field type.
+ */
+function xe_currency_conversion_field_formatter_info_alter(&$info) {
+  $info['decimal']['field']['xe_currency_conversion'] = [
+    'label' => t('XE Currency Conversion'),
+    'field types' => ['decimal'],
+  ];
+}
+
+/**
+ * Implements hook_entity_view().
+ *
+ * Generate the content for node->content extra fields for xe currency enabled content types.
+ *
+ * @param $entity
+ * @param $type
+ * @param $view_mode
+ * @param $langcode
+ */
+function xe_currency_conversion_entity_view(array &$build, $entity, $display, $view_mode) {
+  if ($entity->getEntityTypeId() === 'node') {
+    $node_types = \Drupal::config('xe_currency_conversion.settings')->get('xe_currency_conversion_enabled_content_types');
+
+    foreach ($node_types as $type => $name) {
+      if ($name === $type && $entity->bundle() === $type) {
+        if (!empty($entity->field_xe_gross_price) && !empty($entity->field_xe_base_currency)) {
+          $build['xe_converted_gross_price'] = [
+            '#markup' => tn_tours_calculate_price($entity),
+          ];
+        }
+        if (!empty($entity->field_xe_net_price) && !empty($entity->field_xe_base_currency)) {
+          $original_net_price_field = $entity->field_xe_net_price->value;
+          if(!empty($entity->field_xe_base_currency->target_id)){
+            $original_currency_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($entity->field_xe_base_currency->target_id);
+            $original_currency = $original_currency_term->getName();
+            $build['xe_converted_net_price'] = [
+              '#markup' => format_price_to_gpb(round_price(xe_currency_convert_price($original_net_price_field, $original_currency))),
+            ];
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function xe_currency_conversion_cron_queue_info() {
+  $queues = array();
+  $queues['xe_currency_conversion'] = array(
+    'worker callback' => 'xe_currency_conversion_save',
+    'time' => XE_CURRENCY_CONVERSION_DEFAULT_MAX_TASK_TIME,
+  );
+  return $queues;
+}
+
+/**
+ * Saves a currency conversion object to the database.
+ *
+ * @param $currency_object A stdClass object holding data for an xe_currency_conversion item.
+ */
+function xe_currency_conversion_save($currency_object) {
+  if (!empty($currency_object)) {
+    if (isset($currency_object->crid) && $currency_object->crid > 0) {
+    \Drupal::database()->update('xe_currency_conversion')
+      ->fields([
+        'name' => $currency_object->name,
+        'symbol' => $currency_object->symbol,
+        'rate' => $currency_object->rate,
+        'inverse' => $currency_object->inverse,
+      ])
+      ->condition('crid', $currency_object->crid)
+      ->execute();
+    }
+    else {
+      \Drupal::database()->insert('xe_currency_conversion')
+        ->fields([
+          'name' => $currency_object->name,
+          'symbol' => $currency_object->symbol,
+          'rate' => $currency_object->rate,
+          'inverse' => $currency_object->inverse,
+        ])
+        ->execute();
+    }
+  }
+}
+
+/**
+ * Loads a currency conversion object for the given crid.
+ *
+ * @param $crid The primary key of the conversion object.
+ */
+function xe_currency_conversion_load($crid) {
+  $result = \Drupal::database()->select('xe_currency_conversion', 'cr')
+    ->fields('cr', ['crid', 'name', 'symbol', 'rate', 'inverse'])
+    ->condition('cr.crid', $crid)
+    ->execute()
+    ->fetchAssoc();
+  return $result;
+}
+
+/**
+ * Loads a currency conversion object for the given symbol.
+ *
+ * @param $symbol The three letter symbol for a currency.
+ */
+function xe_currency_conversion_load_by_symbol($symbol) {
+  $result = \Drupal::database()->select('xe_currency_conversion', 'cr')
+    ->fields('cr', ['crid', 'name', 'symbol', 'rate', 'inverse'])
+    ->condition('cr.symbol', $symbol)
+    ->execute()
+    ->fetchAssoc();
+  return $result;
+}

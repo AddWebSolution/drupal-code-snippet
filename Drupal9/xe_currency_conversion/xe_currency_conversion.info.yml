@@ -1,0 +1,5 @@
+name: Currency Conversion
+type: module
+description: Module to import and make available xe.com currency conversion feeds
+core_version_requirement: ^8 || ^9
+package: Currency Conversion

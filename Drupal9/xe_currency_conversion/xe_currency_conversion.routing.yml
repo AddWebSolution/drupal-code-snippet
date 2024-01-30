@@ -1,0 +1,46 @@
+xe_currency_conversion.import:
+  path: '/admin/config/content/xe-currency-conversion/import'
+  defaults:
+    _form: '\Drupal\xe_currency_conversion\XEImporter:import'
+    _title: 'Import currency rates'
+  requirements:
+    _permission: 'administer site configuration'
+
+xe_currency_conversion.settings:
+  path: '/admin/config/services/xe_currency_conversion'
+  defaults:
+    _form: '\Drupal\xe_currency_conversion\Form\XeCurrencyConversionForm'
+    _title: 'Currency Conversion'
+  requirements:
+    _permission: 'administer xe currency conversion'
+  options:
+    _admin_route: TRUE
+
+xe_currency_conversion.settings.api_config:
+  path: '/admin/config/services/xe_currency_conversion/settings'
+  defaults:
+    _form: '\Drupal\xe_currency_conversion\Form\XeCurrencyConversionForm'
+    _title: 'API Config'
+  requirements:
+    _permission: 'administer xe currency conversion'
+  options:
+    _admin_route: TRUE
+
+xe_currency_conversion.query:
+  path: '/admin/config/services/xe_currency_conversion/query'
+  defaults:
+    _form: '\Drupal\xe_currency_conversion\Form\XeCurrencyConversionQueryForm'
+    _title: 'Query the API'
+  requirements:
+    _permission: 'administer xe currency conversion'
+  options:
+    _admin_route: TRUE
+
+xe_currency_conversion.currency:
+  path: '/admin/config/services/xe_currency_conversion/currencies'
+  defaults:
+    _title: 'Xe Currencies'
+  requirements:
+    _permission: 'administer xe currency conversion'
+  options:
+    _admin_route: TRUE

@@ -1,0 +1,25 @@
+xe_currency_conversion.settings:
+  title: 'Currency Conversion'
+  description: 'Configure xe currency conversion settings.'
+  route_name: xe_currency_conversion.settings
+  parent: system.admin_config_services
+  menu_name: xe_currency_conversion
+
+xe_currency_conversion.settings.api_config:
+  title: 'API Config'
+  route_name: xe_currency_conversion.settings.api_config
+  parent: xe_currency_conversion.settings
+  menu_name: xe_currency_conversion
+
+xe_currency_conversion.query:
+  title: 'Query the API'
+  description: 'Manually trigger a batch Currency Conversion import/update process. All currency content will be updated.'
+  route_name: xe_currency_conversion.query
+  parent: xe_currency_conversion.settings
+  menu_name: xe_currency_conversion
+
+xe_currency_conversion.currency:
+  title: 'Currencies'
+  route_name: xe_currency_conversion.currency
+  parent: xe_currency_conversion.settings
+  menu_name: xe_currency_conversion
