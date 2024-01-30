@@ -6,11 +6,11 @@ pim_import_csv.import_form:
   requirements:
     _role: 'administrator+product_importer'
 
-pim_import_csv.pim_csv_template_form:
-  path: '/admin/config/product/csv/settings'
+pim_import_csv.download_template:
+  path: '/admin/config/product/csv/download'
   defaults:
-    _form: '\Drupal\pim_import_csv\Form\PimCsvTemplateForm'
-    _title: 'CSV Template file'
+    _controller: '\Drupal\pim_import_csv\Controller\PimDownloadTemplateController::downloadTemplate'
+    _title: 'Download CSV Template File'
   requirements:
     _role: 'administrator'
   options:
