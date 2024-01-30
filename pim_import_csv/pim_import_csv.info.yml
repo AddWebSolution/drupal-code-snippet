@@ -1,7 +1,0 @@
-name: 'PIM Import CSV'
-type: module
-description: 'Custom module for importing CSV files.'
-core_version_requirement: ^10 || ^11
-package: Custom
-dependencies:
-  - drupal:node
