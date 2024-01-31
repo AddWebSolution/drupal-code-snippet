@@ -6,7 +6,7 @@ The XE Currency Conversion module provides integration with XE.com to import and
 
 - Fetches live currency rates from XE.com API.
 - Allows configuration of XE.com API credentials.
-- Obtain your XE.com API credentials by signing up at [https://apilayer.com/](https://apilayer.com/).
+- Obtain your XE.com API credentials by signing up at [https://apilayer.com/].
 - Imports and stores currency conversion rates in the Drupal database.
 - Drush commands for manual import.
 
