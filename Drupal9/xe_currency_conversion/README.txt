@@ -44,28 +44,6 @@ Configure the module by navigating to `/admin/config/xe_currency_conversion/sett
 ## Automatic Data Updates with Cron
 
 The module supports automatic data updates using Drupal's cron system.
-To set up automatic updates, follow these steps:
-
-1. **Define Base URL**: Define the base URL for the XE.com feed as a constant.
-     Add the following line to your settings file or module file:
-    define('XE_CURRENCY_CONVERSION_BASE_URL', 'https://apilayer.net/api/');
-2. **Define Table Name**: Define the table name for this module.
-     Add the following line to your settings file or module file:
-    define('XE_CURRENCY_CONVERSION_TABLE', 'xe_currency_conversion');
-3. **Define Time Windows**: Define the time windows for XE updates on cron run.
-     Add the following lines to your settings file or module file:
-    // The time window constants for XE updates on cron run.
-    define('XE_CURRENCY_CONVERSION_WINDOW_OPEN', '23:45:00');
-    define('XE_CURRENCY_CONVERSION_WINDOW_CLOSE', '00:15:00 + 1 day');
-4. **Set Max Process Time**: Set the maximum process time for queue operations.
-    Add the following line to your settings file or module file:
-    define('XE_CURRENCY_CONVERSION_DEFAULT_MAX_TASK_TIME', 60);
-5. **Ensure Cron Runs Regularly**: Ensure that Drupal's cron runs
-     regularly by setting up a cron job at the server level. You can do
-     this by adding the following line to your server's crontab:
-    */15 * * * * cd /path/to/drupal && /usr/bin/php /usr/bin/drush cron:execute 
-    --root=/path/to/drupal > /dev/null 2>&1
-    Adjust the paths according to your Drupal installation.
 
 ## Developers
 
