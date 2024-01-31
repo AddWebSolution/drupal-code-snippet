@@ -2,3 +2,8 @@ services:
   xe_currency_conversion.service:
     class: Drupal\xe_currency_conversion\XeCurrencyConversionService
     arguments: ['@queue', '@config.factory', '@state', '@messenger', '@database']
+  xe_currency_conversion.drush_service:
+    class: Drupal\xe_currency_conversion\Commands\XeCurrencyConversionDrushService
+    arguments: ['@xe_currency_conversion.service', '@messenger']
+    tags:
+      - { name: drush.command }

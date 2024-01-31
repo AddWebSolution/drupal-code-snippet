@@ -80,6 +80,13 @@ class XeCurrencyConversionImportForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $client_id = $this->config('xe_currency_conversion.settings')->get('xe_currency_conversion_client_id');
+
+    if (empty($client_id)) {
+      // Display a message if the Client API ID is empty.
+      $this->messenger->addError($this->t('Client API ID is empty. Please configure it in the settings.'));
+      return;
+    }
     $this->xeCurrencyConversionService->importData();
     $this->messenger->addMessage($this->t('Data imported successfully.'));
   }
