@@ -20,7 +20,7 @@ at `/admin/config/xe_currency_conversion/settings`.
 ## Usage
 
 - Access the XE Currency Conversion settings page to configure API credentials.
-- Run manual import or set up automated import through batch processing.
+- Run manual import or set up automated import.
 - View imported currency rates in the Drupal database.
 - Automatic cron job setup for periodic data updates.
 - Use Drush commands for manual import.
