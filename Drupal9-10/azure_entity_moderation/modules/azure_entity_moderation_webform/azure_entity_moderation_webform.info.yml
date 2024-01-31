@@ -1,9 +1,0 @@
-name: 'Azure Entity Moderation Webform'
-description: 'Provides integration with Webform module.'
-core_version_requirement: ^9 || ^10
-package: 'Azure Cognitive Services'
-type: module
-dependencies:
-  - 'azure_entity_moderation:azure_entity_moderation'
-  - 'webform:webform'
-  - 'webform_views:webform_views'

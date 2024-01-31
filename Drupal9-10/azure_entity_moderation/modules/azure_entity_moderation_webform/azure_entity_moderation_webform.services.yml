@@ -1,4 +1,0 @@
-services:
-  azure_entity_moderation_webform.azure_formatter:
-    class: Drupal\azure_entity_moderation_webform\Service\AzureFormatter
-    arguments: []

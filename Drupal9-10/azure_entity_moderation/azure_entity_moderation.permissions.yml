@@ -1,4 +1,0 @@
-manually set azure moderation value:
-  title: 'Manually set moderation value'
-  decription: 'Set moderation value manually, bypassing the Azure API call.'
-  restrict access: TRUE
