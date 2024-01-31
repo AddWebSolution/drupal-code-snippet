@@ -1,44 +1,42 @@
-Installation
----------------------------------------------------------------------------------------------
-Install the module as usual.
-Go to the "XE Currency Conversion" configuration page in the Drupal admin interface.
-Select the node types for which you want to enable xe currency conversion.
-Click "Save configuration".
-Go to the "XE Currency Conversion" menu in the Drupal admin interface.
-Click "Import" to import the xe.com currency conversion feeds.
-Click "Update" to update the xe.com currency conversion feeds.
+# XE Currency Conversion Module
 
-Usage
----------------------------------------------------------------------------------------------
-Go to the node view page for a node type that has xe currency conversion enabled.
-The xe currency conversion price will be displayed next to the original price.
-To convert the price to a different currency, use the "Convert" form provided by the xe currency conversion module.
+The XE Currency Conversion module provides integration with XE.com to import and manage currency conversion rates.
 
-Dependencies
----------------------------------------------------------------------------------------------
-This module depends on the following Drupal modules:
+## Features
 
-Drupal 9/10.
-Views module.
-Apache Solr search module.
+- Fetches live currency rates from XE.com API.
+- Allows configuration of XE.com API credentials.
+- Imports and stores currency conversion rates in the Drupal database.
 
-Configuration
----------------------------------------------------------------------------------------------
-The module has the following configuration options:
+## Installation
 
-xe_currency_conversion_base_url: The base URL for the xe.com feed.
-xe_currency_conversion_table: The table name for this module.
-xe_currency_conversion_window_open: The time window for xe updates on cron run.
-xe_currency_conversion_window_close: The after midnight window close for xe updates on cron run.
-xe_currency_conversion_default_max_task_time: The max process time for queue operations.
+1. Install and enable the module on your Drupal site.
+2. Configure the XE Currency Conversion settings at `/admin/config/xe_currency_conversion/settings`.
 
-Troubleshooting
----------------------------------------------------------------------------------------------
-If you encounter any issues with the module, you can try the following steps:
+## Usage
 
-Check the Drupal logs for any error messages related to the module.
-Check the xe.com API documentation for any changes or updates that may affect the module.
+- Access the XE Currency Conversion settings page to configure API credentials.
+- Run manual import or set up automated import through batch processing.
+- View imported currency rates in the Drupal database.
 
-Maintainer
----------------------------------------------------------------------------------------------
-This module is maintained by addwebsolution.
+## Requirements
+
+- Drupal 8 or later.
+
+## Configuration
+
+Configure the module by navigating to `/admin/config/xe_currency_conversion/settings`.
+
+## Developers
+
+- Maintainer: addwebsolution
+
+## Issues
+
+If you encounter any issues or have suggestions, please [create an issue](https://github.com/AddWebSolution/drupal-code-snippet/issues) on GitHub.
+
+## License
+
+This module is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+

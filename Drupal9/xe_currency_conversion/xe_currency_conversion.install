@@ -1,7 +1,5 @@
 <?php
 
-use Drupal\Core\KeyValueStore\StateInterface;
-
 /**
  * Implements hook_install().
  *
@@ -60,4 +58,3 @@ function xe_currency_conversion_schema() {
   );
   return $schema;
 }
-

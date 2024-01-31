@@ -1,4 +1,4 @@
 services:
-  xe_currency_conversion.importer:
-    class: Drupal\xe_currency_conversion\XEImporter
-    arguments: ['@queue', '@config.factory', '@state']
+  xe_currency_conversion.service:
+    class: Drupal\xe_currency_conversion\XeCurrencyConversionService
+    arguments: ['@queue', '@config.factory', '@state', '@messenger', '@database']

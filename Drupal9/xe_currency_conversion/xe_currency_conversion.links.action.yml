@@ -1,23 +1,5 @@
-xe_currency_conversion.settings.api_config:
-  title: 'API Config'
-  route_name: xe_currency_conversion.settings.api_config
-  appears_on:
-    - xe_currency_conversion.currency
-    - xe_currency_conversion.settings.api_config
-    - xe_currency_conversion.query
-
-xe_currency_conversion.query:
-  title: 'Query the API'
-  route_name: xe_currency_conversion.query
-  appears_on:
-    - xe_currency_conversion.currency
-    - xe_currency_conversion.settings.api_config
-    - xe_currency_conversion.query
-
-xe_currency_conversion.currency:
-  title: 'Currencies'
-  route_name: xe_currency_conversion.currency
-  appears_on:
-    - xe_currency_conversion.currency
-    - xe_currency_conversion.settings.api_config
-    - xe_currency_conversion.query
+xe_currency_conversion.import_action:
+  route_name: xe_currency_conversion.import_form
+  title: 'Import XE Currency Conversion Data'
+  appears_on: 
+    - xe_currency_conversion.config_form
