@@ -2,7 +2,6 @@
 
 namespace Drupal\xe_currency_conversion\Commands;
 
-use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\xe_currency_conversion\XeCurrencyConversionService;
 use Drush\Commands\DrushCommands;
 
@@ -19,23 +18,13 @@ class XeCurrencyConversionDrushService extends DrushCommands {
   protected $xeCurrencyConversionService;
 
   /**
-   * The messenger service.
-   *
-   * @var \Drupal\Core\Messenger\MessengerInterface
-   */
-  protected $messenger;
-
-  /**
    * Constructs a new XeCurrencyConversionDrushService object.
    *
    * @param \Drupal\xe_currency_conversion\XeCurrencyConversionService $xeCurrencyConversionService
    *   The XE Currency Conversion service.
-   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
-   *   The messenger service.
    */
-  public function __construct(XeCurrencyConversionService $xeCurrencyConversionService, MessengerInterface $messenger) {
+  public function __construct(XeCurrencyConversionService $xeCurrencyConversionService) {
     $this->xeCurrencyConversionService = $xeCurrencyConversionService;
-    $this->messenger = $messenger;
   }
 
   /**

@@ -35,7 +35,7 @@ class XeCurrencyConversionService {
   protected $messenger;
 
   /**
-   * Constructs a new XEImporter object.
+   * Constructs a new XE currency conversion service.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config factory.
@@ -72,7 +72,7 @@ class XeCurrencyConversionService {
         }
         else {
           $error_message = !empty($feed['error']) ? $feed['error']['code'] . '. ' . $feed['error']['info'] : '';
-          $this->addMessage('Currency Conversion - error in feed ' . $error_message, 'error');
+          $this->messenger->addMessage('Currency Conversion - error in feed ' . $error_message, 'error');
         }
       }
     }
@@ -90,6 +90,7 @@ class XeCurrencyConversionService {
     if ($client_id) {
       // Query the list endpoint to add pretty names to the currencies.
       $url = XeCurrencyConversionConstants::BASE_URL . 'list?access_key=' . $client_id;
+
       $json = file_get_contents($url);
       $currency_code_name = json_decode($json, TRUE);
 
