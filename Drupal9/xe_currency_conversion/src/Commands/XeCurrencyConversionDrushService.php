@@ -50,15 +50,8 @@ class XeCurrencyConversionDrushService extends DrushCommands {
     $this->output()->writeln('Importing currency conversion data...');
 
     // Call the importData method from the service.
-    $result = $this->xeCurrencyConversionService->importData();
-
-    // Check if the service provided any data.
-    if ($result) {
-      $this->output()->writeln('Data imported successfully.');
-    }
-    else {
-      $this->output()->writeln('No data imported. Check if the Client API ID is empty or if there was an issue with the service.');
-    }
+    $this->xeCurrencyConversionService->importData();
+    $this->output()->writeln('Data imported successfully.');
   }
 
 }
