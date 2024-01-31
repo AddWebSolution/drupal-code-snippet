@@ -58,7 +58,7 @@ class XeCurrencyConversionService {
 
     if ($client_id) {
       // Construct the URL for the XE.com API.
-      $url = XE_CURRENCY_CONVERSION_BASE_URL . 'live?access_key=' . $client_id . '&source=GBP&date=' . date("Y-m-d");
+      $url = XeCurrencyConversionConstants::BASE_URL . 'live?access_key=' . $client_id . '&source=GBP&date=' . date("Y-m-d");
 
       // Fetch the JSON data from the API.
       $json = file_get_contents($url);
@@ -89,7 +89,7 @@ class XeCurrencyConversionService {
 
     if ($client_id) {
       // Query the list endpoint to add pretty names to the currencies.
-      $url = XE_CURRENCY_CONVERSION_BASE_URL . 'list?access_key=' . $client_id;
+      $url = XeCurrencyConversionConstants::BASE_URL . 'list?access_key=' . $client_id;
       $json = file_get_contents($url);
       $currency_code_name = json_decode($json, TRUE);
 

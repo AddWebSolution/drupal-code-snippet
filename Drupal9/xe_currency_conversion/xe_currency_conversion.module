@@ -2,30 +2,22 @@
 
 /**
  * @file
- * Provides constants and functions related to XE Currency Conversion module.
+ * Contains xe_currency_conversion module implementation.
  */
 
-// Define the base URL for the xe.com feed as a constant.
-define('XE_CURRENCY_CONVERSION_BASE_URL', 'https://apilayer.net/api/');
-
-// Define the table name for this module.
-define('XE_CURRENCY_CONVERSION_TABLE', 'xe_currency_conversion');
-
-// The time window constants for xe updates on cron run.
-define('XE_CURRENCY_CONVERSION_WINDOW_OPEN', '23:45:00');
-define('XE_CURRENCY_CONVERSION_WINDOW_CLOSE', '00:15:00 + 1 day');
-
-// The max process time for queue operations.
-define('XE_CURRENCY_CONVERSION_DEFAULT_MAX_TASK_TIME', 60);
+use Drupal\xe_currency_conversion\XeCurrencyConversionConstants;
 
 /**
  * Implements hook_cron().
+ *
+ * Check if the current time is within the allowed window for XE updates and
+ * perform XE Currency Conversion updates accordingly.
  */
 function xe_currency_conversion_cron() {
   // Check if the current time is within the allowed window for XE updates.
   $current_time = strtotime(date('H:i:s'));
-  $window_open = strtotime(XE_CURRENCY_CONVERSION_WINDOW_OPEN);
-  $window_close = strtotime(XE_CURRENCY_CONVERSION_WINDOW_CLOSE);
+  $window_open = strtotime(XeCurrencyConversionConstants::WINDOW_OPEN);
+  $window_close = strtotime(XeCurrencyConversionConstants::WINDOW_CLOSE);
 
   if ($current_time >= $window_open && $current_time <= $window_close) {
     // Perform XE Currency Conversion updates.
@@ -38,7 +30,8 @@ function xe_currency_conversion_cron() {
  */
 function xe_currency_conversion_import_data() {
   // Get the API client ID from the module configuration.
-  $client_id = \Drupal::config('xe_currency_conversion.settings')->get('xe_currency_conversion_client_id');
+  $config = \Drupal::config('xe_currency_conversion.settings');
+  $client_id = $config->get('xe_currency_conversion_client_id');
 
   if (!empty($client_id)) {
     // Call the importData method on the service.
