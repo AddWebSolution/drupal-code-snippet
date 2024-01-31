@@ -4,4 +4,3 @@ xe_currency_conversion.config_form:
   description: 'Configure XE Currency Conversion settings.'
   route_name: xe_currency_conversion.config_form
   weight: 100
-

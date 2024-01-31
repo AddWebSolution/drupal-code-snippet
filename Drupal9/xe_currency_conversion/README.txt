@@ -14,7 +14,8 @@ to import and manage currency conversion rates.
 ## Installation
 
 1. Install and enable the module on your Drupal site.
-2. Configure the XE Currency Conversion settings at `/admin/config/xe_currency_conversion/settings`.
+2. Configure the XE Currency Conversion settings
+at `/admin/config/xe_currency_conversion/settings`.
 
 ## Usage
 
@@ -26,7 +27,7 @@ to import and manage currency conversion rates.
 
 ## Drush Commands
 
-lando drush xe-currency-import
+drush xe-currency-import
 
 ## Views Integration
 
@@ -62,7 +63,8 @@ To set up automatic updates, follow these steps:
 5. **Ensure Cron Runs Regularly**: Ensure that Drupal's cron runs
      regularly by setting up a cron job at the server level. You can do
      this by adding the following line to your server's crontab:
-    */15 * * * * cd /path/to/drupal && /usr/bin/php /usr/bin/drush cron:execute --root=/path/to/drupal > /dev/null 2>&1
+    */15 * * * * cd /path/to/drupal && /usr/bin/php /usr/bin/drush cron:execute 
+    --root=/path/to/drupal > /dev/null 2>&1
     Adjust the paths according to your Drupal installation.
 
 ## Developers
@@ -77,4 +79,3 @@ please [create an issue](https://github.com/AddWebSolution/drupal-code-snippet/i
 ## License
 
 This module is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-

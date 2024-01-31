@@ -66,13 +66,6 @@ class XeCurrencyConversionImportForm extends FormBase {
       '#value' => $this->t('Import Data'),
     ];
 
-    // Add a Back button to navigate to the config form.
-    $form['back_to_config'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Back to Configuration'),
-      '#submit' => ['::backToConfigForm'],
-    ];
-
     return $form;
   }
 
@@ -80,22 +73,21 @@ class XeCurrencyConversionImportForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $client_id = $this->config('xe_currency_conversion.settings')->get('xe_currency_conversion_client_id');
-
-    if (empty($client_id)) {
-      // Display a message if the Client API ID is empty.
-      $this->messenger->addError($this->t('Client API ID is empty. Please configure it in the settings.'));
-      return;
-    }
     $this->xeCurrencyConversionService->importData();
     $this->messenger->addMessage($this->t('Data imported successfully.'));
   }
 
   /**
-   * Custom submit handler to redirect to the config form.
+   * {@inheritdoc}
    */
-  public function backToConfigForm(array &$form, FormStateInterface $form_state) {
-    $form_state->setRedirect('xe_currency_conversion.config_form');
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    // Validate client ID.
+    $client_id = $this->config('xe_currency_conversion.settings')->get('xe_currency_conversion_client_id');
+
+    if (empty($client_id)) {
+      // Display a message if the Client API ID is empty.
+      $form_state->setErrorByName('submit', $this->t('Client API ID is empty. Please configure it in the settings.'));
+    }
   }
 
 }

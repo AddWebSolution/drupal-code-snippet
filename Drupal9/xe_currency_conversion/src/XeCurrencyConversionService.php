@@ -5,8 +5,6 @@ namespace Drupal\xe_currency_conversion;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Messenger\MessengerInterface;
-use Drupal\Core\Queue\QueueFactory;
-use Drupal\Core\State\StateInterface;
 
 /**
  * Provides XE currency conversion functionality.
@@ -23,25 +21,11 @@ class XeCurrencyConversionService {
   protected $database;
 
   /**
-   * The queue factory.
-   *
-   * @var \Drupal\Core\Queue\QueueFactory
-   */
-  protected $queueFactory;
-
-  /**
    * The config factory.
    *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
   protected $configFactory;
-
-  /**
-   * The state service.
-   *
-   * @var \Drupal\Core\State\StateInterface
-   */
-  protected $state;
 
   /**
    * The messenger service.
@@ -53,21 +37,15 @@ class XeCurrencyConversionService {
   /**
    * Constructs a new XEImporter object.
    *
-   * @param \Drupal\Core\Queue\QueueFactory $queueFactory
-   *   The queue factory.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The config factory.
-   * @param \Drupal\Core\State\StateInterface $state
-   *   The state service.
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger service.
    * @param \Drupal\Core\Database\Connection $database
    *   The database connection.
    */
-  public function __construct(QueueFactory $queueFactory = NULL, ConfigFactoryInterface $configFactory = NULL, StateInterface $state = NULL, MessengerInterface $messenger = NULL, Connection $database = NULL) {
-    $this->queueFactory = $queueFactory;
+  public function __construct(ConfigFactoryInterface $configFactory, MessengerInterface $messenger, Connection $database) {
     $this->configFactory = $configFactory;
-    $this->state = $state;
     $this->messenger = $messenger;
     $this->database = $database;
   }
@@ -162,19 +140,6 @@ class XeCurrencyConversionService {
         }
       }
     }
-  }
-
-  /**
-   * Adds a message using the messenger service.
-   *
-   * @param string $message
-   *   The message to add.
-   * @param string $type
-   *   The type of the message (e.g., 'status' or 'error').
-   */
-  protected function addMessage($message, $type = 'status') {
-    // Add a message using the messenger service.
-    $this->messenger->addMessage($message, $type);
   }
 
 }

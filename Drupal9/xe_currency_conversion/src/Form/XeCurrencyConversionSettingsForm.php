@@ -36,7 +36,6 @@ class XeCurrencyConversionSettingsForm extends ConfigFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Client API ID'),
       '#default_value' => $config->get('xe_currency_conversion_client_id'),
-    // Add this line to make the field required.
       '#required' => TRUE,
     ];
 

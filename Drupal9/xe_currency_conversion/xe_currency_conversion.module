@@ -46,7 +46,8 @@ function xe_currency_conversion_import_data() {
 
     // Import data from the XE.com API.
     $service->importData();
-  } else {
+  }
+  else {
     // Log error if the API client ID is empty.
     \Drupal::logger('xe_currency_conversion')->error('XE Currency Conversion - Client API ID is empty.');
   }

@@ -1,5 +1,10 @@
 xe_currency_conversion.import_action:
   route_name: xe_currency_conversion.import_form
   title: 'Import XE Currency Conversion Data'
-  appears_on: 
+  appears_on:
     - xe_currency_conversion.config_form
+xe_currency_conversion.form_action:
+  route_name: xe_currency_conversion.config_form
+  title: 'XE Currency Conversion Settings'
+  appears_on:
+    - xe_currency_conversion.import_form

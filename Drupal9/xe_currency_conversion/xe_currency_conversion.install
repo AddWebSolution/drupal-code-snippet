@@ -1,60 +1,60 @@
 <?php
 
 /**
- * Implements hook_install().
- *
- * Create the database table for currency conversion data.
+ * @file
+ * Install and update functions for the xe_currency_conversion module.
  */
+
 /**
  * Implements hook_schema().
  *
  * Define the database schema for currency conversion data.
  */
 function xe_currency_conversion_schema() {
-  // $schema = array();
-  return array(
-    'xe_currency_conversion' => array(
+  $schema = [
+    'xe_currency_conversion' => [
       'description' => 'The base table for currency conversion items.',
-      'fields' => array(
-        'crid' => array(
+      'fields' => [
+        'crid' => [
           'description' => 'The primary identifier for a currency conversion item.',
           'type' => 'serial',
           'unsigned' => TRUE,
           'not null' => TRUE,
-        ),
-        'symbol' => array(
+        ],
+        'symbol' => [
           'description' => 'The currency\'s symbol.',
           'type' => 'varchar',
           'length' => 3,
           'not null' => TRUE,
           'default' => '',
-        ),
-        'name' => array(
+        ],
+        'name' => [
           'description' => 'The name of the currency.',
           'type' => 'varchar',
           'length' => 256,
           'not null' => TRUE,
           'default' => '',
-        ),
-        'rate' => array(
+        ],
+        'rate' => [
           'description' => 'Provides the rate for the current currency.',
           'type' => 'numeric',
           'precision' => 60,
           'scale' => 10,
           'not null' => TRUE,
           'default' => 0,
-        ),
-        'inverse' => array(
+        ],
+        'inverse' => [
           'description' => 'Provides the inverse rate for the current currency.',
           'type' => 'numeric',
           'precision' => 30,
           'scale' => 10,
           'not null' => TRUE,
           'default' => 0,
-        ),
-      ),
-      'primary key' => array('crid'),
-    ),
-  );
+        ],
+      ],
+      'primary key' => ['crid'],
+    ],
+  ];
+
   return $schema;
 }
